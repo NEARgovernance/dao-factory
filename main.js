@@ -39,12 +39,21 @@ let nearAIAuth = null;
 function updateAuthStatus() {
   const el = document.getElementById("authStatus");
   if (!el) return;
-  el.textContent = nearAIAuth
-    ? "NEAR AI: Authenticated ✓"
-    : "NEAR AI: Not authenticated";
-  el.className = nearAIAuth
-    ? "auth-status auth-success"
-    : "auth-status auth-pending";
+
+  if (nearAIAuth) {
+    el.textContent = "Authenticated ✓";
+    el.className = "auth-status auth-success";
+  } else {
+    el.textContent = "Send a message to authenticate...";
+    el.className = "auth-status auth-pending";
+  }
+}
+
+function updateButtonState() {
+  const askBtn = document.getElementById("askNearAIButton");
+  if (!askBtn) return;
+  const isWalletConnected = Boolean(currentAccount);
+  askBtn.disabled = !isWalletConnected;
 }
 
 function updateWalletUI() {
@@ -68,6 +77,7 @@ function updateWalletUI() {
   }
 
   updateAuthStatus();
+  updateButtonState();
 }
 
 export function setupWalletButtons(selector) {
@@ -83,11 +93,14 @@ export function setupWalletButtons(selector) {
   const connectBtn = document.createElement("button");
   connectBtn.id = "connectWalletButton";
   connectBtn.textContent = "Connect Wallet";
+  connectBtn.classList.add("btn", "btn-secondary");
   container.appendChild(connectBtn);
 
   const signOutBtn = document.createElement("button");
   signOutBtn.id = "signOutButton";
   signOutBtn.textContent = "Sign Out";
+  signOutBtn.classList.add("btn", "btn-secondary");
+  signOutBtn.style.display = "none";
   container.appendChild(signOutBtn);
 
   document.body.appendChild(container);
@@ -152,6 +165,7 @@ askBtn.addEventListener("click", async () => {
         "Login to NEAR AI"
       );
       updateAuthStatus();
+      updateButtonState();
     } catch (error) {
       console.error("Login failed:", error);
       return;
@@ -168,9 +182,6 @@ askBtn.addEventListener("click", async () => {
   messagesDiv.innerHTML += `<div class="user-message">You: ${escapeHtml(
     question
   )}</div><br>`;
-
-  askBtn.disabled = true;
-  askBtn.textContent = "Processing...";
 
   const responseEl = document.createElement("div");
   responseEl.innerHTML = getProgressBarHTML();
@@ -201,7 +212,6 @@ askBtn.addEventListener("click", async () => {
       err.message || err.toString()
     )}</div>`;
   } finally {
-    askBtn.disabled = false;
-    askBtn.textContent = "Send";
+    responseEl.classList.remove("progress-bar");
   }
 });

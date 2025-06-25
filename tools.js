@@ -24,12 +24,25 @@ export const tools = [
     type: "function",
     function: {
       name: "get_proposals",
-      description: "Get governance proposals from the NEAR voting contract",
+      description:
+        "Get governance proposals from the NEAR voting contract. Use reasonable limits between 1-100.",
       parameters: {
         type: "object",
         properties: {
-          from_index: { type: "number", default: 0 },
-          limit: { type: "number", default: 10 },
+          from_index: {
+            type: "number",
+            default: 0,
+            minimum: 0,
+            maximum: 10000,
+            description: "Starting index for proposals (0-10000)",
+          },
+          limit: {
+            type: "number",
+            default: 10,
+            minimum: 1,
+            maximum: 100,
+            description: "Number of proposals to fetch (1-100)",
+          },
         },
         required: [],
       },
@@ -60,11 +73,9 @@ export const toolImplementations = {
     }
 
     try {
-      // Get wallet info following your pattern
       const selectedWallet = await walletSelector.wallet();
       const networkId = walletSelector.options.network;
 
-      // Check if signed in
       const isSignedIn = walletSelector.isSignedIn();
       let accounts = [];
 
@@ -72,7 +83,6 @@ export const toolImplementations = {
         accounts = await selectedWallet.getAccounts();
       }
 
-      // Test RPC connection
       const rpcUrl =
         networkId === "mainnet"
           ? "https://rpc.mainnet.near.org"
@@ -80,7 +90,6 @@ export const toolImplementations = {
 
       const provider = new providers.JsonRpcProvider({ url: rpcUrl });
 
-      // Test basic RPC call
       let rpcTest = null;
       try {
         const blockResult = await provider.block({ finality: "final" });
@@ -95,7 +104,6 @@ export const toolImplementations = {
         };
       }
 
-      // Test contract existence
       let contractTest = null;
       try {
         const accountResult = await provider.query({
@@ -150,28 +158,42 @@ export const toolImplementations = {
     }
   },
 
-  get_proposals: async ({ from_index = 0, limit = 10 } = {}) => {
+  get_proposals: async (params = {}) => {
+    const originalFromIndex = params.from_index;
+    const originalLimit = params.limit;
+
+    const from_index = Math.max(
+      0,
+      Math.min(parseInt(params.from_index) || 0, 10000)
+    );
+    const limit = Math.max(1, Math.min(parseInt(params.limit) || 10, 100));
+
+    console.log("Parameter validation:", {
+      original_from_index: originalFromIndex,
+      original_limit: originalLimit,
+      validated_from_index: from_index,
+      validated_limit: limit,
+    });
+
     if (!walletSelector) {
       throw new Error("Wallet selector not initialized");
     }
 
     try {
-      // Follow your pattern for getting wallet info
       const selectedWallet = await walletSelector.wallet();
       const networkId = walletSelector.options.network;
 
-      // Always use mainnet for the govai contract since we know it exists there
       const rpcUrl = "https://rpc.mainnet.near.org";
       const provider = new providers.JsonRpcProvider({ url: rpcUrl });
 
       const votingContractId = "vote.govai.near";
       const args = { from_index, limit };
 
-      console.log("Calling contract with:", {
+      console.log("Calling contract with validated args:", {
         contract: votingContractId,
         method: "get_proposals",
         args,
-        network: "mainnet (forced)",
+        network: "mainnet",
         wallet_network: networkId,
       });
 
@@ -185,7 +207,6 @@ export const toolImplementations = {
 
       const proposals = JSON.parse(Buffer.from(result.result).toString());
 
-      // Format the proposals for better readability
       const formatted = proposals.map((p) => ({
         id: p.id,
         title: p.title || "No title",
@@ -243,6 +264,7 @@ export const toolImplementations = {
           contract_id: "vote.govai.near",
           network_used: "mainnet",
           wallet_network: walletSelector?.options?.network || "unknown",
+          validated_parameters: { from_index, limit },
           error_details: {
             type: error.type,
             message: error.message,
