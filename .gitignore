@@ -1,30 +1,27 @@
+# Dependencies
+node_modules/
+
+# Environment variables
 .env
-/target
-*/target/
-**/target/
-/wasi-sdk*
-binaryen-*
-node_modules
-neardev*
-out
+.env.local
+
+# Build outputs
+dist/
+build/
+out/
+web4.js
+
+# NEAR development
+neardev/
+target/
+
+# Logs
+*.log
+
+# OS generated files
 .DS_Store
-wabt-*
-emsdk
-quickjs-*
-emsdk
-/test-results/
-/playwright-report/
-/blob-report/
-/playwright/.cache/
-bin
-*.mp4
-file_list.txt
-freeze_frames
-example-contracts.car
-yarn-error.log
-.spin/
-.github/
-*.wasm
-crt.pem
-spin.sig
-spin
+Thumbs.db
+
+# Editor directories
+.vscode/
+.idea/

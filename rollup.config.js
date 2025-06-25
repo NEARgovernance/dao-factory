@@ -1,31 +1,9 @@
 import { rollupPluginHTML as html } from "@web/rollup-plugin-html";
-import { terser } from "rollup-plugin-terser";
+import terser from "@rollup/plugin-terser";
 import { readFileSync, writeFileSync } from "fs";
 
-const { AI_PROXY_BASEURL, RPC_URL, NETWORK_ID } =
-  process.env;
-
-if (!AI_PROXY_BASEURL) {
-  console.error(
-    "Environment variable AI_PROXY_BASEURL not set. Must be set to the base URL of where the AI proxy is hosted",
-  );
-  process.exit(1);
-}
-if (!RPC_URL) {
-  console.error(
-    "Environment variable RPC_URL not set. Must be set to the NEAR RPC node URL",
-  );
-  process.exit(1);
-}
-if (!NETWORK_ID) {
-  console.error(
-    "Environment variable NETWORK_ID not set. Must be set to the NEAR protocol network id ( e.g. mainnet, testnet )",
-  );
-  process.exit(1);
-}
-
 export default {
-  input: "./web/index.html",
+  input: "./index.html",
   output: { dir: "dist" },
   plugins: [
     html({ minify: true }),
@@ -33,17 +11,13 @@ export default {
     {
       name: "inline-js",
       closeBundle: () => {
-        const js = readFileSync("dist/main.js")
-          .toString()
-          .replace("http://localhost:3000", AI_PROXY_BASEURL)
-          .replace("http://localhost:14500", RPC_URL)
-          .replace('"mainnet"', `"${NETWORK_ID}"`);
+        const js = readFileSync("dist/main.js").toString();
 
         const html = readFileSync("dist/index.html")
           .toString()
           .replace(
             `<script type="module" src="./main.js"></script>`,
-            `<script type="module">${js}</script>`,
+            `<script type="module">${js}</script>`
           );
 
         writeFileSync(
@@ -56,8 +30,7 @@ export function web4_get() {
         })
       );
 }
-
-      `,
+      `
         );
       },
     },

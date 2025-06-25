@@ -6,14 +6,14 @@ export async function handleNearAILoginCallback() {
 
   if (accountId) {
     const nearaiauthobject = JSON.parse(
-      localStorage.getItem(NEAR_AI_AUTH_OBJECT_STORAGE_KEY),
+      localStorage.getItem(NEAR_AI_AUTH_OBJECT_STORAGE_KEY)
     );
     nearaiauthobject.account_id = accountId;
     nearaiauthobject.signature = callbackparams.get("signature");
     nearaiauthobject.public_key = callbackparams.get("publicKey");
     localStorage.setItem(
       NEAR_AI_AUTH_OBJECT_STORAGE_KEY,
-      JSON.stringify(nearaiauthobject),
+      JSON.stringify(nearaiauthobject)
     );
     location.hash = "";
   }
@@ -23,7 +23,7 @@ export async function nearAIlogin(wallet, message) {
   // Generate nonce based on current time in milliseconds
   const nonce = new String(Date.now());
   const nonceBuffer = Buffer.from(
-    new TextEncoder().encode(nonce.padStart(32, "0")),
+    new TextEncoder().encode(nonce.padStart(32, "0"))
   );
 
   const recipient = "ai.near";
@@ -38,7 +38,7 @@ export async function nearAIlogin(wallet, message) {
 
   localStorage.setItem(
     NEAR_AI_AUTH_OBJECT_STORAGE_KEY,
-    JSON.stringify(authObject),
+    JSON.stringify(authObject)
   );
   const signedMessage = await wallet.signMessage({
     message,
@@ -53,7 +53,7 @@ export async function nearAIlogin(wallet, message) {
 
   localStorage.setItem(
     NEAR_AI_AUTH_OBJECT_STORAGE_KEY,
-    JSON.stringify(authObject),
+    JSON.stringify(authObject)
   );
 
   return authObject;

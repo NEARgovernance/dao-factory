@@ -1,0 +1,20 @@
+{
+  "type": "module",
+  "scripts": {
+    "generateimportmap": "jspm link index.html -o index.html"
+  },
+  "dependencies": {
+    "@near-wallet-selector/core": "^9.0.3",
+    "@near-wallet-selector/modal-ui-js": "^9.0.3",
+    "@near-wallet-selector/my-near-wallet": "^9.0.3",
+    "buffer": "^6.0.3",
+    "marked": "^15.0.12",
+    "near-api-js": "^5.1.1"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@web/rollup-plugin-html": "^2.3.0",
+    "jspm": "^3.0.0",
+    "rollup": "^4.44.0"
+  }
+}
