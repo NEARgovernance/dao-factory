@@ -158,7 +158,7 @@ async function deployBallotBox() {
     // Get configuration values from the form
     const venearAccountId =
       document.getElementById("venearAccountId").value.trim() ||
-      "v.hos.testnet";
+      "v.hos03.testnet";
     const ownerAccountId =
       document.getElementById("ownerAccountId").value.trim() ||
       appState.accountId ||
