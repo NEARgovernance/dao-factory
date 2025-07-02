@@ -1,6 +1,6 @@
-## NEAR Governance Assistant
+## NEAR Voting Booth
 
 Check it out:
-[govbot.near.page](https://govbot.near.page)
+[booth.testnet.page](https://booth.testnet.page)
 
 Let us know any feedback ☺️

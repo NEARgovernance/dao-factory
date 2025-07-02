@@ -3,349 +3,465 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="icon"
-      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='80'%3E🏛️%3C/text%3E%3C/svg%3E"
-      type="image/svg+xml"
-    />
-    <title>NEAR Governance Assistant</title>
     <script
       async
-      src="https://ga.jspm.io/npm:es-module-shims@2.6.0/dist/es-module-shims.js"
+      src="https://ga.jspm.io/npm:es-module-shims@2.6.1/dist/es-module-shims.js"
       crossorigin="anonymous"
     ></script>
     <script type="importmap">
       {
         "imports": {
-          "@near-wallet-selector/core": "https://ga.jspm.io/npm:@near-wallet-selector/core@9.0.3/index.js",
-          "@near-wallet-selector/modal-ui-js": "https://ga.jspm.io/npm:@near-wallet-selector/modal-ui-js@9.0.3/index.js",
-          "@near-wallet-selector/my-near-wallet": "https://ga.jspm.io/npm:@near-wallet-selector/my-near-wallet@9.0.3/index.js",
-          "buffer": "https://ga.jspm.io/npm:buffer@6.0.3/index.js",
-          "marked": "https://ga.jspm.io/npm:marked@15.0.7/lib/marked.esm.js"
+          "@fastnear/api": "https://ga.jspm.io/npm:@fastnear/api@0.9.7/dist/esm/index.js"
         },
         "scopes": {
-          "./": {
-            "near-api-js": "https://ga.jspm.io/npm:near-api-js@5.1.1/lib/browser-index.js"
-          },
           "https://ga.jspm.io/": {
-            "@near-js/accounts": "https://ga.jspm.io/npm:@near-js/accounts@1.3.0/lib/commonjs/index.cjs",
-            "@near-js/crypto": "https://ga.jspm.io/npm:@near-js/crypto@1.4.0/lib/commonjs/index.cjs",
-            "@near-js/keystores": "https://ga.jspm.io/npm:@near-js/keystores@0.2.0/lib/commonjs/index.cjs",
-            "@near-js/keystores-browser": "https://ga.jspm.io/npm:@near-js/keystores-browser@0.2.0/lib/commonjs/index.cjs",
-            "@near-js/providers": "https://ga.jspm.io/npm:@near-js/providers@1.0.0/lib/commonjs/index.cjs",
-            "@near-js/signers": "https://ga.jspm.io/npm:@near-js/signers@0.2.0/lib/commonjs/index.cjs",
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.0/lib/commonjs/index.cjs",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.0/lib/commonjs/index.cjs",
-            "@near-js/utils": "https://ga.jspm.io/npm:@near-js/utils@1.0.0/lib/commonjs/index.cjs",
-            "@near-js/wallet-account": "https://ga.jspm.io/npm:@near-js/wallet-account@1.3.0/lib/commonjs/index.cjs",
-            "@near-wallet-selector/wallet-utils": "https://ga.jspm.io/npm:@near-wallet-selector/wallet-utils@9.0.3/index.js",
-            "@noble/curves/ed25519": "https://ga.jspm.io/npm:@noble/curves@1.2.0/ed25519.js",
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.3.2/crypto.js",
-            "@noble/hashes/sha256": "https://ga.jspm.io/npm:@noble/hashes@1.3.3/sha256.js",
-            "@noble/hashes/sha512": "https://ga.jspm.io/npm:@noble/hashes@1.3.2/sha512.js",
-            "@noble/hashes/utils": "https://ga.jspm.io/npm:@noble/hashes@1.3.2/utils.js",
-            "base-x": "https://ga.jspm.io/npm:base-x@2.0.6/index.js",
-            "base64-js": "https://ga.jspm.io/npm:base64-js@1.5.1/index.js",
-            "bn.js": "https://ga.jspm.io/npm:bn.js@4.12.2/lib/bn.js",
-            "borsh": "https://ga.jspm.io/npm:borsh@1.0.0/lib/cjs/index.js",
-            "brorand": "https://ga.jspm.io/npm:brorand@1.1.0/index.js",
-            "bs58": "https://ga.jspm.io/npm:bs58@4.0.0/index.js",
-            "buffer": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/browser/buffer.js",
-            "copy-to-clipboard": "https://ga.jspm.io/npm:copy-to-clipboard@3.3.3/index.js",
-            "crypto": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/browser/crypto.js",
-            "depd": "https://ga.jspm.io/npm:depd@2.0.0/lib/browser/index.js",
-            "dijkstrajs": "https://ga.jspm.io/npm:dijkstrajs@1.0.3/dijkstra.js",
-            "elliptic": "https://ga.jspm.io/npm:elliptic@6.6.1/lib/dev.elliptic.js",
-            "events": "https://ga.jspm.io/npm:events@3.3.0/events.js",
-            "exponential-backoff": "https://ga.jspm.io/npm:exponential-backoff@3.1.2/dist/backoff.js",
-            "generate-function": "https://ga.jspm.io/npm:generate-function@2.3.1/index.js",
-            "generate-object-property": "https://ga.jspm.io/npm:generate-object-property@1.2.0/index.js",
-            "hash.js": "https://ga.jspm.io/npm:hash.js@1.1.7/lib/hash.js",
-            "hmac-drbg": "https://ga.jspm.io/npm:hmac-drbg@1.0.1/lib/hmac-drbg.js",
-            "ieee754": "https://ga.jspm.io/npm:ieee754@1.2.1/index.js",
-            "inherits": "https://ga.jspm.io/npm:inherits@2.0.4/inherits_browser.js",
-            "is-my-ip-valid": "https://ga.jspm.io/npm:is-my-ip-valid@1.0.1/index.js",
-            "is-my-json-valid": "https://ga.jspm.io/npm:is-my-json-valid@2.20.6/index.js",
-            "is-property": "https://ga.jspm.io/npm:is-property@1.0.2/is-property.js",
-            "isomorphic-unfetch": "https://ga.jspm.io/npm:isomorphic-unfetch@3.1.0/browser.js",
-            "js-sha256": "https://ga.jspm.io/npm:js-sha256@0.9.0/src/sha256.js",
-            "jsonpointer": "https://ga.jspm.io/npm:jsonpointer@5.0.1/jsonpointer.js",
-            "lru_map": "https://ga.jspm.io/npm:lru_map@0.4.1/dist/lru.js",
-            "minimalistic-assert": "https://ga.jspm.io/npm:minimalistic-assert@1.0.1/index.js",
-            "minimalistic-crypto-utils": "https://ga.jspm.io/npm:minimalistic-crypto-utils@1.0.1/lib/utils.js",
-            "mustache": "https://ga.jspm.io/npm:mustache@4.0.0/mustache.js",
-            "near-abi": "https://ga.jspm.io/npm:near-abi@0.1.1/lib/index.js",
-            "near-api-js": "https://ga.jspm.io/npm:near-api-js@5.1.1/lib/browser-index.js",
-            "near-api-js/lib/providers": "https://ga.jspm.io/npm:near-api-js@5.1.1/lib/providers/index.js",
-            "near-api-js/lib/transaction": "https://ga.jspm.io/npm:near-api-js@5.0.0/lib/transaction.js",
-            "near-api-js/lib/utils": "https://ga.jspm.io/npm:near-api-js@5.0.0/lib/utils/index.js",
-            "process": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/browser/process.js",
-            "qrcode": "https://ga.jspm.io/npm:qrcode@1.5.4/lib/browser.js",
-            "randombytes": "https://ga.jspm.io/npm:randombytes@2.1.0/browser.js",
-            "rxjs": "https://ga.jspm.io/npm:rxjs@7.8.1/dist/esm5/index.js",
-            "safe-buffer": "https://ga.jspm.io/npm:safe-buffer@5.2.1/index.js",
-            "secp256k1": "https://ga.jspm.io/npm:secp256k1@5.0.0/elliptic.js",
-            "toggle-selection": "https://ga.jspm.io/npm:toggle-selection@1.0.6/index.js",
-            "tslib": "https://ga.jspm.io/npm:tslib@2.8.1/tslib.es6.mjs",
-            "unfetch": "https://ga.jspm.io/npm:unfetch@4.2.0/dist/unfetch.js",
-            "util": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/browser/util.js",
-            "xtend": "https://ga.jspm.io/npm:xtend@4.0.2/immutable.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/accounts@1.3.0/lib/esm/index.js": {
-            "@near-js/crypto": "https://ga.jspm.io/npm:@near-js/crypto@1.4.0/lib/esm/index.js",
-            "@near-js/providers": "https://ga.jspm.io/npm:@near-js/providers@1.0.0/lib/esm/index.js",
-            "@near-js/signers": "https://ga.jspm.io/npm:@near-js/signers@0.2.0/lib/esm/index.js",
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.0/lib/esm/index.js",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.0/lib/esm/index.js",
-            "@near-js/utils": "https://ga.jspm.io/npm:@near-js/utils@1.0.0/lib/esm/index.js",
-            "@noble/hashes/sha256": "https://ga.jspm.io/npm:@noble/hashes@1.3.3/esm/sha256.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/accounts@1.4.1/": {
-            "@near-js/crypto": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@near-js/providers": "https://ga.jspm.io/npm:@near-js/providers@1.0.3/lib/commonjs/index.cjs",
-            "@near-js/signers": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.3/lib/commonjs/index.cjs",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.1/lib/commonjs/index.cjs",
-            "@near-js/utils": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@noble/hashes/sha256": "https://ga.jspm.io/npm:@noble/hashes@1.7.1/sha256.js",
-            "near-abi": "https://ga.jspm.io/npm:near-abi@0.2.0/lib/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/accounts@1.4.1/lib/esm/index.js": {
-            "@near-js/providers": "https://ga.jspm.io/npm:@near-js/providers@1.0.3/lib/esm/index.js",
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.3/lib/esm/index.js",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.1/lib/esm/index.js",
-            "@noble/hashes/sha256": "https://ga.jspm.io/npm:@noble/hashes@1.7.1/esm/sha256.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/crypto@1.4.0/lib/esm/index.js": {
-            "@near-js/utils": "https://ga.jspm.io/npm:@near-js/utils@1.0.0/lib/esm/index.js",
-            "@noble/curves/ed25519": "https://ga.jspm.io/npm:@noble/curves@1.2.0/esm/ed25519.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/keystores@0.2.0/lib/esm/index.js": {
-            "@near-js/crypto": "https://ga.jspm.io/npm:@near-js/crypto@1.4.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/providers@1.0.0/lib/esm/index.js": {
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.0/lib/esm/index.js",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.0/lib/esm/index.js",
-            "@near-js/utils": "https://ga.jspm.io/npm:@near-js/utils@1.0.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/providers@1.0.3/": {
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.3/lib/commonjs/index.cjs",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.1/lib/commonjs/index.cjs",
-            "@near-js/utils": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/providers@1.0.3/lib/esm/index.js": {
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.3/lib/esm/index.js",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.1/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/signers@0.2.0/lib/esm/index.js": {
-            "@near-js/crypto": "https://ga.jspm.io/npm:@near-js/crypto@1.4.0/lib/esm/index.js",
-            "@near-js/keystores": "https://ga.jspm.io/npm:@near-js/keystores@0.2.0/lib/esm/index.js",
-            "@noble/hashes/sha256": "https://ga.jspm.io/npm:@noble/hashes@1.3.3/esm/sha256.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/transactions@1.3.0/lib/esm/index.js": {
-            "@near-js/crypto": "https://ga.jspm.io/npm:@near-js/crypto@1.4.0/lib/esm/index.js",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.0/lib/esm/index.js",
-            "@noble/hashes/sha256": "https://ga.jspm.io/npm:@noble/hashes@1.3.3/esm/sha256.js",
-            "borsh": "https://ga.jspm.io/npm:borsh@1.0.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/transactions@1.3.3/": {
-            "@near-js/crypto": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.1/lib/commonjs/index.cjs",
-            "@noble/hashes/sha256": "https://ga.jspm.io/npm:@noble/hashes@1.7.1/sha256.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/transactions@1.3.3/lib/esm/index.js": {
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.1/lib/esm/index.js",
-            "@noble/hashes/sha256": "https://ga.jspm.io/npm:@noble/hashes@1.7.1/esm/sha256.js",
-            "borsh": "https://ga.jspm.io/npm:borsh@1.0.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/utils@1.0.0/lib/esm/index.js": {
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/wallet-account@1.3.0/lib/esm/index.js": {
-            "@near-js/accounts": "https://ga.jspm.io/npm:@near-js/accounts@1.3.0/lib/esm/index.js",
-            "@near-js/crypto": "https://ga.jspm.io/npm:@near-js/crypto@1.4.0/lib/esm/index.js",
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.0/lib/esm/index.js",
-            "@near-js/utils": "https://ga.jspm.io/npm:@near-js/utils@1.0.0/lib/esm/index.js",
-            "borsh": "https://ga.jspm.io/npm:borsh@1.0.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/wallet-account@1.3.3/": {
-            "@near-js/accounts": "https://ga.jspm.io/npm:@near-js/accounts@1.4.1/lib/commonjs/index.cjs",
-            "@near-js/crypto": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.3/lib/commonjs/index.cjs",
-            "@near-js/utils": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js"
-          },
-          "https://ga.jspm.io/npm:@near-js/wallet-account@1.3.3/lib/esm/index.js": {
-            "@near-js/accounts": "https://ga.jspm.io/npm:@near-js/accounts@1.4.1/lib/esm/index.js",
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.3/lib/esm/index.js",
-            "borsh": "https://ga.jspm.io/npm:borsh@1.0.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-wallet-selector/core@9.0.3/": {
-            "borsh": "https://ga.jspm.io/npm:borsh@2.0.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:@near-wallet-selector/my-near-wallet@9.0.3/": {
+            "@fastnear/borsh-schema": "https://ga.jspm.io/npm:@fastnear/borsh-schema@0.9.7/dist/esm/index.js",
+            "@fastnear/utils": "https://ga.jspm.io/npm:@fastnear/utils@0.9.7/dist/esm/index.js",
+            "@fastnear/wallet-adapter": "https://ga.jspm.io/npm:@fastnear/wallet-adapter@0.9.7/dist/esm/index.js",
+            "@noble/curves/ed25519": "https://ga.jspm.io/npm:@noble/curves@1.9.2/esm/ed25519.js",
+            "@noble/hashes/": "https://ga.jspm.io/npm:@noble/hashes@1.8.0/esm/",
+            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.8.0/esm/crypto.js",
+            "@noble/hashes/sha2": "https://ga.jspm.io/npm:@noble/hashes@1.8.0/esm/sha2.js",
+            "base58-js": "https://ga.jspm.io/npm:base58-js@3.0.2/index.js",
+            "big.js": "https://ga.jspm.io/npm:big.js@7.0.1/big.mjs",
             "borsh": "https://ga.jspm.io/npm:borsh@2.0.0/lib/esm/index.js",
-            "near-api-js": "https://ga.jspm.io/npm:near-api-js@5.0.0/lib/browser-index.js"
-          },
-          "https://ga.jspm.io/npm:@noble/curves@1.2.0/esm/ed25519.js": {
-            "@noble/hashes/sha512": "https://ga.jspm.io/npm:@noble/hashes@1.3.2/esm/sha512.js",
-            "@noble/hashes/utils": "https://ga.jspm.io/npm:@noble/hashes@1.3.2/esm/utils.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.3.2/esm/_sha2.js": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.3.2/esm/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.3.2/esm/sha512.js": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.3.2/esm/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.3.2/esm/utils.js": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.3.2/esm/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.3.3/": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.3.3/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.3.3/esm/_sha2.js": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.3.3/esm/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.3.3/esm/sha256.js": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.3.3/esm/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.3.3/esm/utils.js": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.3.3/esm/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.7.1/": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.7.1/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.7.1/esm/_md.js": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.7.1/esm/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.7.1/esm/sha256.js": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.7.1/esm/crypto.js"
-          },
-          "https://ga.jspm.io/npm:@noble/hashes@1.7.1/esm/utils.js": {
-            "@noble/hashes/crypto": "https://ga.jspm.io/npm:@noble/hashes@1.7.1/esm/crypto.js"
-          },
-          "https://ga.jspm.io/npm:near-api-js@5.0.0/_/BUDgL8Qv.js": {
-            "@near-js/accounts": "https://ga.jspm.io/npm:@near-js/accounts@1.3.0/lib/esm/index.js",
-            "@near-js/utils": "https://ga.jspm.io/npm:@near-js/utils@1.0.0/lib/esm/index.js",
-            "@near-js/wallet-account": "https://ga.jspm.io/npm:@near-js/wallet-account@1.3.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:near-api-js@5.0.0/_/C5aeuoSt.js": {
-            "@near-js/keystores": "https://ga.jspm.io/npm:@near-js/keystores@0.2.0/lib/esm/index.js"
-          },
-          "https://ga.jspm.io/npm:near-api-js@5.1.1/": {
-            "@near-js/accounts": "https://ga.jspm.io/npm:@near-js/accounts@1.4.1/lib/commonjs/index.cjs",
-            "@near-js/crypto": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@near-js/keystores": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@near-js/keystores-browser": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@near-js/providers": "https://ga.jspm.io/npm:@near-js/providers@1.0.3/lib/commonjs/index.cjs",
-            "@near-js/signers": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@near-js/transactions": "https://ga.jspm.io/npm:@near-js/transactions@1.3.3/lib/commonjs/index.cjs",
-            "@near-js/types": "https://ga.jspm.io/npm:@near-js/types@0.3.1/lib/commonjs/index.cjs",
-            "@near-js/utils": "https://ga.jspm.io/npm:@jspm/core@2.1.0/nodelibs/@empty.js",
-            "@near-js/wallet-account": "https://ga.jspm.io/npm:@near-js/wallet-account@1.3.3/lib/commonjs/index.cjs"
-          },
-          "https://ga.jspm.io/npm:near-api-js@5.1.1/_/BUDgL8Qv.js": {
-            "@near-js/accounts": "https://ga.jspm.io/npm:@near-js/accounts@1.4.1/lib/esm/index.js",
-            "@near-js/wallet-account": "https://ga.jspm.io/npm:@near-js/wallet-account@1.3.3/lib/esm/index.js"
+            "js-base64": "https://ga.jspm.io/npm:js-base64@3.7.7/base64.mjs"
           }
         }
       }
     </script>
     <link
+      rel="icon"
+      href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ctext x='50%25' y='50%25' dominant-baseline='middle' text-anchor='middle' font-size='80'%3E🏭%3C/text%3E%3C/svg%3E"
+      type="image/svg+xml"
+    />
+    <title>DAOs of Stake</title>
+    <link
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
-    <link
-      href="https://cdn.jsdelivr.net/npm/@near-wallet-selector/modal-ui@8.9.15/styles.css"
-      rel="stylesheet"
-    />
     <style>
+      body {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        min-height: 100vh;
+        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          sans-serif;
+      }
+
+      .main-container {
+        background: white;
+        border-radius: 20px;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+        margin: 20px auto;
+        max-width: 1000px;
+        overflow: hidden;
+      }
+
       .header {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 1.888rem 0;
-        margin-bottom: 1.5rem;
-        background-color: #fff;
+        background: linear-gradient(135deg, #2d3748 0%, #1a202c 100%);
+        color: white;
+        padding: 30px;
+        text-align: center;
       }
 
-      .header h3 {
-        margin: 0;
-        font-size: 1.75rem;
-        font-weight: 500;
+      .header h1 {
+        font-size: 2.5rem;
+        margin-bottom: 10px;
+        font-weight: 700;
       }
 
-      #messages {
+      .content {
+        padding: 30px;
+      }
+
+      .card {
+        border: none;
+        border-radius: 15px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
         margin-bottom: 20px;
+      }
+
+      .btn-custom {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border: none;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+        padding: 12px 24px;
+        font-weight: 600;
+      }
+
+      .btn-custom:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.3);
+        color: white;
+      }
+
+      .status-dot {
+        width: 12px;
+        height: 12px;
+        border-radius: 50%;
+        background: #ef4444;
+        display: inline-block;
+        margin-right: 8px;
+      }
+
+      .status-dot.connected {
+        background: #10b981;
+      }
+
+      .loading {
+        display: inline-block;
+        width: 20px;
+        height: 20px;
+        border: 3px solid #f3f3f3;
+        border-top: 3px solid #667eea;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+      }
+
+      @keyframes spin {
+        0% {
+          transform: rotate(0deg);
+        }
+        100% {
+          transform: rotate(360deg);
+        }
+      }
+
+      .contract-item {
+        border: 2px solid #e2e8f0;
+        border-radius: 10px;
+        padding: 15px;
+        margin: 10px 0;
+        transition: all 0.2s ease;
+        cursor: pointer;
+      }
+
+      .contract-item:hover {
+        border-color: #667eea;
+        background: #f8fafc;
+        transform: translateY(-2px);
+      }
+
+      .results-section {
+        background: #1a202c;
+        border-radius: 15px;
+        padding: 25px;
+        color: white;
+        margin-top: 20px;
+      }
+
+      .result-item {
+        background: #2d3748;
+        border-radius: 8px;
+        padding: 15px;
+        margin-bottom: 15px;
+        border-left: 4px solid #667eea;
+      }
+
+      .factory-stats {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        color: white;
+        border-radius: 15px;
+        padding: 20px;
+        margin-bottom: 20px;
+      }
+
+      @media (max-width: 768px) {
+        .main-container {
+          margin: 10px;
+          border-radius: 10px;
+        }
+        .content {
+          padding: 20px;
+        }
+        .header h1 {
+          font-size: 2rem;
+        }
       }
     </style>
   </head>
   <body>
-    <div
-      class="modal fade"
-      id="progressmodal"
-      data-bs-backdrop="static"
-      data-bs-keyboard="false"
-    >
-      <div class="modal-dialog">
-        <div class="modal-content">
-          <div class="modal-header">
-            <h1 class="modal-title fs-5 text-white" id="progressModalLabel">
-              Processing...
-            </h1>
-            <button
-              type="button"
-              class="btn-close btn-close-white"
-              data-bs-dismiss="modal"
-            ></button>
-          </div>
-          <div class="modal-body">
-            <div id="progressbar" class="progress">
-              <div
-                class="progress-bar progress-bar-striped progress-bar-animated"
-                role="progressbar"
-                style="width: 100%"
-              ></div>
+    <div class="main-container">
+      <!-- Header -->
+      <div class="header">
+        <h1>🗳️ Ballot Box Factory</h1>
+        <p class="mb-0 opacity-75">
+          Create and manage decentralized voting contracts
+        </p>
+      </div>
+
+      <div class="content">
+        <!-- Account Connection -->
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+              <div>
+                <div class="d-flex align-items-center mb-2">
+                  <span class="status-dot" id="statusDot"></span>
+                  <span id="statusText">Not Connected</span>
+                </div>
+                <div id="accountInfo" style="display: none">
+                  Account: <code id="accountId"></code>
+                </div>
+              </div>
+              <div>
+                <button
+                  class="btn btn-custom"
+                  id="connectBtn"
+                  onclick="connectWallet()"
+                >
+                  Connect Wallet
+                </button>
+                <button
+                  class="btn btn-outline-danger"
+                  id="disconnectBtn"
+                  onclick="disconnectWallet()"
+                  style="display: none"
+                >
+                  Disconnect
+                </button>
+              </div>
             </div>
-            <div
-              id="progressErrorAlert"
-              class="alert alert-danger"
-              role="alert"
-              style="display: none"
-            ></div>
           </div>
+        </div>
+
+        <!-- Factory Stats -->
+        <div id="factoryStats" class="factory-stats" style="display: none">
+          <div class="row text-center">
+            <div class="col-md-4">
+              <h3 id="totalContracts">0</h3>
+              <small>Total Ballot Boxes</small>
+            </div>
+            <div class="col-md-4">
+              <h3 id="factoryAddress">...</h3>
+              <small>Factory Contract</small>
+            </div>
+            <div class="col-md-4">
+              <h3 id="networkName">testnet</h3>
+              <small>Network</small>
+            </div>
+          </div>
+        </div>
+
+        <!-- Create New Ballot Box -->
+        <div id="createSection" class="card" style="display: none">
+          <div class="card-header">
+            <h4 class="mb-0">🎫 Create New Ballot Box</h4>
+          </div>
+          <div class="card-body">
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Factory Contract ID:</label>
+                <input
+                  type="text"
+                  id="factoryContractId"
+                  class="form-control"
+                  placeholder="ballotbox.testnet"
+                  value="ballotbox.testnet"
+                />
+              </div>
+              <div class="col-md-6 mb-3">
+                <label class="form-label fw-bold">Ballot Box Name:</label>
+                <input
+                  type="text"
+                  id="ballotName"
+                  class="form-control"
+                  placeholder="my-ballot"
+                />
+              </div>
+            </div>
+
+            <!-- Configuration Section -->
+            <div class="mb-4">
+              <h5 class="mb-3">📋 Ballot Box Configuration</h5>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-bold">veNEAR Account ID:</label>
+                  <input
+                    type="text"
+                    id="venearAccountId"
+                    class="form-control"
+                    value="v.hos03.testnet"
+                    placeholder="v.hos03.testnet"
+                  />
+                  <small class="text-muted"
+                    >The veNEAR token contract for voting power</small
+                  >
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-bold">Owner Account ID:</label>
+                  <input
+                    type="text"
+                    id="ownerAccountId"
+                    class="form-control"
+                    placeholder="Will use your connected account"
+                  />
+                  <small class="text-muted"
+                    >Leave empty to use your connected account</small
+                  >
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-bold"
+                    >Voting Duration (days):</label
+                  >
+                  <input
+                    type="number"
+                    id="votingDurationDays"
+                    class="form-control"
+                    value="7"
+                    min="1"
+                    max="30"
+                  />
+                  <small class="text-muted"
+                    >How long proposals can be voted on</small
+                  >
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-bold">Max Voting Options:</label>
+                  <input
+                    type="number"
+                    id="maxVotingOptions"
+                    class="form-control"
+                    value="10"
+                    min="2"
+                    max="20"
+                  />
+                  <small class="text-muted">Maximum options per proposal</small>
+                </div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-bold">Proposal Fee (NEAR):</label>
+                  <input
+                    type="number"
+                    id="proposalFee"
+                    class="form-control"
+                    value="0.1"
+                    min="0"
+                    step="0.01"
+                  />
+                  <small class="text-muted">Cost to create a proposal</small>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label class="form-label fw-bold"
+                    >Vote Storage Fee (NEAR):</label
+                  >
+                  <input
+                    type="number"
+                    id="voteStorageFee"
+                    class="form-control"
+                    value="0.001"
+                    min="0"
+                    step="0.001"
+                  />
+                  <small class="text-muted">Storage cost per vote</small>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">Reviewers:</label>
+                <input
+                  type="text"
+                  id="reviewers"
+                  class="form-control"
+                  placeholder="account1.testnet, account2.testnet"
+                />
+                <small class="text-muted"
+                  >Comma-separated list of accounts that can review
+                  proposals</small
+                >
+              </div>
+
+              <div class="mb-3">
+                <label class="form-label fw-bold">Guardians:</label>
+                <input
+                  type="text"
+                  id="guardians"
+                  class="form-control"
+                  placeholder="account1.testnet, account2.testnet"
+                />
+                <small class="text-muted"
+                  >Comma-separated list of accounts that act as guardians</small
+                >
+              </div>
+            </div>
+
+            <div class="mb-3">
+              <label class="form-label fw-bold"
+                >Deployment Deposit (NEAR):</label
+              >
+              <input
+                type="text"
+                id="deploymentDeposit"
+                class="form-control"
+                placeholder="3"
+                value="3"
+              />
+              <small class="text-muted"
+                >Minimum ~3 NEAR required for contract deployment</small
+              >
+            </div>
+
+            <div class="d-flex gap-2">
+              <button class="btn btn-custom" onclick="deployBallotBox()">
+                <span
+                  id="deployLoader"
+                  style="display: none"
+                  class="loading me-2"
+                ></span>
+                Deploy Ballot Box
+              </button>
+              <button
+                class="btn btn-outline-primary"
+                onclick="loadDeployedContracts()"
+              >
+                Refresh List
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deployed Contracts List -->
+        <div id="contractsSection" class="card" style="display: none">
+          <div class="card-header">
+            <h4 class="mb-0">📋 Deployed Ballot Boxes</h4>
+          </div>
+          <div class="card-body">
+            <div id="contractsList">
+              <div class="text-center py-4">
+                <p class="text-muted">No ballot boxes deployed yet</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Results Section -->
+        <div id="results-section" class="results-section" style="display: none">
+          <div class="d-flex justify-content-between align-items-center mb-3">
+            <h3>📋 Activity Log</h3>
+            <button
+              class="btn btn-outline-light btn-sm"
+              onclick="clearResults()"
+            >
+              Clear Log
+            </button>
+          </div>
+          <div id="results-content"></div>
         </div>
       </div>
     </div>
 
-    <div class="container">
-      <header class="header">
-        <h3>NEAR AI Gov Assistant</h3>
-      </header>
-
-      <div class="text-center mb-3">
-        <div id="walletInfo" class="wallet-info" style="display: none">
-          <strong>Connected:</strong> <span id="accountId"></span>
-          <div id="authStatus" class="auth-status auth-pending">
-            Send a message to authenticate...
-          </div>
-        </div>
-      </div>
-
-      <div class="chat-container">
-        <div id="messages"></div>
-        <textarea
-          id="question"
-          class="form-control"
-          rows="4"
-          placeholder="Type your message here..."
-        ></textarea>
-        <button id="askNearAIButton" class="btn btn-primary mt-3" disabled>
-          Send
-        </button>
-      </div>
-    </div>
-
+    <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-    <script type="module" src="main.js"></script>
+
+    <!-- Main App Script -->
+    <script type="module" src="./main.js"></script>
   </body>
 </html>
